@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>phoneNumbers</key>
+	<array>
+		<string>666554433</string>
+		<string>667443322</string>
+		<string>666554433</string>
+		<string>995000000</string>
+	</array>
+	<key>keywords</key>
+	<array>
+		<string>codigo</string>
+		<string>participante</string>
+	</array>
+	<key>minLenghtKeywords</key>
+	<integer>3</integer>
+	<key>maxLengthKeywords</key>
+	<integer>7</integer>
+</dict>
+</plist>
