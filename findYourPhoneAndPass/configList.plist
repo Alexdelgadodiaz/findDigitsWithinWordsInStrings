@@ -6,7 +6,7 @@
 	<array>
 		<string>666554433</string>
 		<string>667443322</string>
-		<string>666554433</string>
+		<string>666554432</string>
 		<string>995000000</string>
 	</array>
 	<key>keywords</key>
@@ -14,9 +14,9 @@
 		<string>codigo</string>
 		<string>participante</string>
 	</array>
-	<key>minLenghtKeywords</key>
+	<key>minLenghtpasscodes</key>
 	<integer>3</integer>
-	<key>maxLengthKeywords</key>
+	<key>maxLengthpasscodes</key>
 	<integer>7</integer>
 </dict>
 </plist>

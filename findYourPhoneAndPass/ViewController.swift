@@ -16,37 +16,56 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        //fecthing phones and keywords from plist
+        //fecthing phones and keywords from plist usuing ADDService to read the plist.
         let myArrayofPhones = service.fetchFromConfigListWithCode(code: "phoneNumbers")
         let myArrayOfKeywords = service.fetchFromConfigListWithCode(code: "keywords")
         print("Phones: ",  myArrayofPhones,  "Keywords: ",  myArrayOfKeywords)
         
-        
-        let myString = "phone number 0034555663322 and code 1234567"
+        //EXAMPLE string to that could to check both numbers.
+        let myString = "phone number 0034666554433 and codepass 1234567"
+        print(myString)
+        //split the string in words and set words in array
         let words = myString.components(separatedBy: " ")
         
-        let myArray = self.findKeywordsAndPhoneNumberInArray(myArray: words)
+        //dict with founded numbers. ["phone:0034222331122", "passcode":12345]
+        let numbersFromExampleString = self.findpasscodesAndPhoneNumberInArray(arrayOfWords: words)
         
-        print(myArray)
-        
+        //print if the phonenumbers is defined in the plist.
+        if checkIfKnownPhoneNumber(numbersFromExampleString: numbersFromExampleString , numbersFromPlist: myArrayofPhones) {
+            print("The phone number from the example string is a known number")
+
+        }
     }
     
-    func findKeywordsAndPhoneNumberInArray(myArray:[String]) -> [String:String] {
-        
-        //call instance of service to fetch the min lenght of the value
-        let minLengthKeycode = service.fetchIntFromConfigListWithCode(code: "minLenghtKeywords")
-        
-        var phone : String = ""
-        var keyword : String = ""
-        
-        for word in myArray {
-            if word.containMoreDigitsThan(numbers: minLengthKeycode ){
-                if word.characters.count < 9{ keyword = word }else{ phone = word}
+    //function to know if the phone given in the example string is part of the plist
+    func checkIfKnownPhoneNumber(numbersFromExampleString: [String:String], numbersFromPlist:[String]) -> Bool {
+      
+        for phoneNumberInPlist in numbersFromPlist{
+            for (key, value) in numbersFromExampleString {
+                if (key == "phone" && (value.range(of: String(phoneNumberInPlist)) != nil)){
+                    return true
+                }
             }
         }
-        return ["phone":phone, "keyword":keyword]
+        return false
     }
     
+    //returns the phones and passcodes founded in the example String.
+    func findpasscodesAndPhoneNumberInArray(arrayOfWords:[String]) -> [String:String] {
+        
+        //call instance of service to fetch the min lenght of the value
+        let minLengthKeycode = service.fetchIntFromConfigListWithCode(code: "minLenghtpasscodes")
+        
+        var phone : String = ""
+        var passcode : String = ""
+        
+        for word in arrayOfWords {
+            if word.containMoreDigitsThan(numbers: minLengthKeycode ){
+                if word.characters.count < 9{ passcode = word }else{ phone = word}
+            }
+        }
+        return ["phone":phone, "passcode":passcode]
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
